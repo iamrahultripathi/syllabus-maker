@@ -1,0 +1,165 @@
+{% extends 'main.html' %} {% block content %}
+
+<div>
+    <nav aria-label="Page navigation example" style="position:relative;top:3rem;left:75rem">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
+<div>
+    <div class="container">
+        <table class="table table-bordered border-dark text-center" id="creditSchemeTable" style="overflow-y:scroll">
+            <thead>
+                <tr class="text-danger">
+                    <th rowspan="2">Course Code</th>
+                    <th rowspan="2">Course Name</th>
+                    <th colspan="3" class="text-center">Teaching <br/> Scheme (Hrs.)<br/>TH</th>
+                    <th rowspan="2">Total (Hrs.)</th>
+                    <th colspan="3" class="text-center">Credits Assigned</th>
+                    <th rowspan="2">Total Credits</th>
+                    <th rowspan="2">Course Categories</th>
+                </tr>
+                <tr class="text-danger">
+                    <th>TH</th>
+                    <th>P</th>
+                    <th>TUT</th>
+                    <th>TH</th>
+                    <th>P</th>
+                    <th>TUT</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+
+                {% for item in data %}
+                <tr id={{item.courseCode}} contenteditable="true">
+                    <td>{{item.courseCode}}</td>
+                    <td>{{item.courseName}}</td>
+                    <td>{{item.teachingSchemeTH}}</td>
+                    <td>{{item.teachingSchemeP}}</td>
+                    <td>{{item.teachingSchemeTUT}}</td>
+                    <td>{{item.TotalHours}}</td>
+                    <td>{{item.creditAssignedTH}}</td>
+                    <td>{{item.creditAssignedP}}</td>
+                    <td>{{item.creditAssignedTUT}}</td>
+                    <td>{{item.totalCredits}}</td>
+                    <td>{{item.courseCategories}}</td>
+                </tr>
+                {% endfor %}
+                <tr class="fw-bold">
+                    <td></td>
+                    <td>Total</td>
+                    <td>{{totalteachingSchemeTH}}</td>
+                    <td>{{totalteachingSchemeP}}</td>
+                    <td>{{totalteachingSchemeTUT}}</td>
+                    <td>{{totalTotalHours}}</td>
+                    <td>{{totalcreditAssignedTH}}</td>
+                    <td>{{totalcreditAssignedP}}</td>
+                    <td>{{totalcreditAssignedTUT}}</td>
+                    <td>{{totaltotalCredits}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <form method="post" id="creditSchemeTable">
+                        {% csrf_token %}
+                        <td>
+                            <div class="form-group">
+                                <input required type="text" class="form-control" id="courseCode" name="courseCode">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input required type="text" class="form-control" id="courseName" name="courseName">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="teachingSchemeth" name="teachingSchemeth">
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="teachingSchemep" name="teachingSchemep">
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="teachingSchemetut" name="teachingSchemetut">
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="creditAssignedth" name="creditAssignedth">
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="creditAssignedp" name="creditAssignedp">
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="creditAssignedtut" name="creditAssignedtut">
+                                <option value=0>0</option>
+                                <option value=1>1</option>
+                                <option value=2>2</option>
+                                <option value=3>3</option>
+                                <option value=4>4</option>
+                                <option value=5>5</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input required type="text" class="form-control" id="courseCategories" name="courseCategories">
+                            </div>
+                        </td>
+                        <button type="submit" style="position:relative;top:-1rem;" id="submit_creditScheme" class="btn btn-primary mt-4">Submit</button>
+                    </form>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
