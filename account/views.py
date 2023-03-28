@@ -8,6 +8,7 @@ from .models import *
 
 def loginl(request):
     if request.method == "POST":
+        request.session['count'] = 0
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(username=username, password=password)
@@ -16,11 +17,14 @@ def loginl(request):
             return redirect("home/")
         else:
             messages.error(request, "Incorrect username or password.")
-            return redirect(reverse('login'))
+            if request.session['count']==0:
+                return redirect('/')
+
+            
     return render(request, 'login.html')
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/')
 def home(request):
     return render(request, 'home.html')
 
