@@ -30,3 +30,22 @@ class CreditScheme(models.Model):
 
   def __str__(self):
      return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseName
+  
+class ExamSchm(models.Model):
+  courseCodeEx = models.CharField(max_length=255)
+  courseNameEx = models.CharField(max_length=255)
+  caISE = models.IntegerField()
+  caIA = models.IntegerField()
+  caTotal = models.IntegerField()
+  ese = models.IntegerField()
+  tw = models.IntegerField()
+  oral = models.IntegerField()
+  oralAndPrac = models.IntegerField()
+  totalEx = models.IntegerField()
+  branch=models.CharField(max_length=255)
+  sem=models.CharField(max_length=255)
+  programme=models.CharField(max_length=255)
+
+  def __str__(self):
+         return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseNameEx
+ 
