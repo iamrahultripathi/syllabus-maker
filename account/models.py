@@ -26,6 +26,7 @@ class CreditScheme(models.Model):
   courseCategories = models.CharField(max_length=255)
   branch=models.CharField(max_length=255)
   sem=models.CharField(max_length=255)
+  programme=models.CharField(max_length=255)
 
   def __str__(self):
-     return self.courseName
+     return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseName
