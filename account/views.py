@@ -51,9 +51,9 @@ def creditScheme(request):
         programme=request.GET.get('programme', None)
         contact_data = CreditScheme(courseCode=courseCode, courseName=courseName, teachingSchemeTH=teachingSchemeTH,teachingSchemeP=teachingSchemeP,teachingSchemeTUT=teachingSchemeTUT, TotalHours=TotalHours, creditAssignedTH=creditAssignedTH,creditAssignedP=creditAssignedP,creditAssignedTUT=creditAssignedTUT, totalCredits=totalCredits, courseCategories=courseCategories,branch=branch, sem=sem,programme=programme)
         contact_data.save()
-    request.session['branch']=request.GET.get('branch', None)
-    request.session['sem']=request.GET.get('sem', None)
-    request.session['programme']=request.GET.get('programme', None)
+        request.session['branch']=request.GET.get('branch', None)
+        request.session['sem']=request.GET.get('sem', None)
+        request.session['programme']=request.GET.get('programme', None)
     # data = CreditScheme.objects.all()
     data = CreditScheme.objects.filter(branch= request.GET.get('branch'), programme= request.GET.get('programme'), sem= request.GET.get('sem')).values()
     totalteachingSchemeTH=sum(data.values_list('teachingSchemeTH', flat=True))
@@ -64,16 +64,16 @@ def creditScheme(request):
     totalcreditAssignedP=sum(data.values_list('creditAssignedP', flat=True))
     totalcreditAssignedTUT=sum(data.values_list('creditAssignedTUT', flat=True))
     totaltotalCredits=sum(data.values_list('totalCredits', flat=True))
-    request.session['branch']=branch
+    
     # totalteachingSchemeTH=CreditScheme.objects.aggregate(Sum('teachingSchemeTH'))
-    student = {'data':data, 'totalteachingSchemeTH':totalteachingSchemeTH, 'totalteachingSchemeP':totalteachingSchemeP,'totalteachingSchemeTUT':totalteachingSchemeTUT,'totalTotalHours':totalTotalHours, 'totalcreditAssignedTH':totalcreditAssignedTH,'totalcreditAssignedP':totalcreditAssignedP,'totalcreditAssignedTUT':totalcreditAssignedTUT, 'totalcreditAssignedTUT':totalcreditAssignedTUT,'totaltotalCredits':totaltotalCredits}
+    student = {'val':"Credit",'data':data, 'totalteachingSchemeTH':totalteachingSchemeTH, 'totalteachingSchemeP':totalteachingSchemeP,'totalteachingSchemeTUT':totalteachingSchemeTUT,'totalTotalHours':totalTotalHours, 'totalcreditAssignedTH':totalcreditAssignedTH,'totalcreditAssignedP':totalcreditAssignedP,'totalcreditAssignedTUT':totalcreditAssignedTUT, 'totalcreditAssignedTUT':totalcreditAssignedTUT,'totaltotalCredits':totaltotalCredits}
     return render(request,"creditScheme.html",student)
 
 def examinationScheme(request):
     branch=request.session['branch']
     sem=request.session['sem']
     programme=request.session['programme']
-    student={'branch':branch,'sem':sem, 'programme':programme}
+    student={'branch':branch,'sem':sem, 'programme':programme,'val':"Examination"}
     return render(request, 'examinationScheme.html',student)
 
 
