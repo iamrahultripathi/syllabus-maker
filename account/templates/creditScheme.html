@@ -1,5 +1,7 @@
 {% extends 'main.html' %} {% block content %}
 
+{% comment %} <button style="position:relative;top:-1rem;" id="save_creditScheme" class="btn btn-primary mt-4">Save</button> {% endcomment %}
+
 <div>
     <nav aria-label="Page navigation example" style="position:relative;top:3rem;left:75rem">
         <ul class="pagination">
@@ -78,6 +80,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="teachingSchemeth" name="teachingSchemeth">
+                                <option value="" disabled selected>Select an option</option>
                                 <option value=0>0</option>
                                 <option value=1>1</option>
                                 <option value=2>2</option>
@@ -90,6 +93,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="teachingSchemep" name="teachingSchemep">
+                                <option value="" disabled selected>Select an option</option>
                                 <option value=0>0</option>
                                 <option value=1>1</option>
                                 <option value=2>2</option>
@@ -102,6 +106,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="teachingSchemetut" name="teachingSchemetut">
+                                <option value="" disabled selected>Select an option</option>
                                 <option value=0>0</option>
                                 <option value=1>1</option>
                                 <option value=2>2</option>
@@ -116,6 +121,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="creditAssignedth" name="creditAssignedth">
+                                <option value="" disabled selected>Select an option</option>
                                 <option value=0>0</option>
                                 <option value=1>1</option>
                                 <option value=2>2</option>
@@ -128,6 +134,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="creditAssignedp" name="creditAssignedp">
+                                <option value="" disabled selected>Select an option</option>
                                 <option value=0>0</option>
                                 <option value=1>1</option>
                                 <option value=2>2</option>
@@ -140,6 +147,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="creditAssignedtut" name="creditAssignedtut">
+                                <option value="" disabled selected>Select an option</option>
                                 <option value=0>0</option>
                                 <option value=1>1</option>
                                 <option value=2>2</option>
@@ -153,7 +161,23 @@
                         </td>
                         <td>
                             <div class="form-group">
-                                <input required type="text" class="form-control" id="courseCategories" name="courseCategories">
+                                <select required class="form-control" id="courseCategories" name="courseCategories">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="HS">HS</option>
+                                    <option value="ES">ES</option>
+                                    <option value="BS">BS</option>
+                                    <option value="PC">PC</option>
+                                    <option value="PE">PE</option>
+                                    <option value="OE">OE</option>
+                                    <option value="LC">LC</option>
+                                    <option value="PR">PR</option>
+                                    <option value="AC">AC</option>
+                                    <option value="AOCC">AOCC</option>
+                                    <option value="AOAC">AOAC</option>
+                                    <option value="AVAC">AVAC</option>
+                                    <option value="EX">EX</option>
+                                    <option value="I">I</option>
+                                </select>
                             </div>
                         </td>
                         <button type="submit" style="position:relative;top:-1rem;" id="submit_creditScheme" class="btn btn-primary mt-4">Submit</button>

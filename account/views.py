@@ -89,9 +89,18 @@ def examinationScheme(request):
         contact_data = ExamSchm(courseCodeEx=courseCode, courseNameEx=courseName, caISE=caISE,caIA=caIA,caTotal=caTotal, ese=ese, tw=tw,oral=oral,oralAndPrac=oralAndPrac, totalEx=totalEx,branch=branch, sem=sem,programme=programme)
         contact_data.save()
     data = ExamSchm.objects.filter(branch=branch, programme=programme, sem=sem).values()
-    
+    totalISE=sum(data.values_list('caISE', flat=True))
+    totalIA=sum(data.values_list('caIA', flat=True))
+    totalcaTotal=sum(data.values_list('caTotal', flat=True))
+    totalese=sum(data.values_list('ese', flat=True))
+    totaltw=sum(data.values_list('tw', flat=True))
+    totaloral=sum(data.values_list('oral', flat=True))
+    totaloralAndPrac=sum(data.values_list('oralAndPrac', flat=True))
+    totalAll=sum(data.values_list('totalEx', flat=True))
         
-    student={'data':data,'branch':branch,'sem':sem, 'programme':programme,'val':"Examination",'courseCode':courseCode,'courseName':courseName}
+    student={'data':data,'totalISE':totalISE,'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
+             'branch':branch,'sem':sem, 'programme':programme,
+             'val':"Examination",'courseCode':courseCode,'courseName':courseName}
     return render(request, 'examinationScheme.html',student)
 
 

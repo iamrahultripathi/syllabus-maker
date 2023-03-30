@@ -50,6 +50,19 @@
                     <td>{{item.totalEx}}</td>
                 </tr>
                 {% endfor %}
+                <tr class="fw-bold">
+                    <td>Total</td>
+                    <td></td>
+                    <td>{{totalISE}}</td>
+                    <td>{{totalIA}}</td>
+                    <td>{{totalcaTotal}}</td>
+                    <td>{{totalese}}</td>
+                    <td>{{totaltw}}</td>
+                    <td>{{totaloral}}</td>
+                    <td>{{totaloralAndPrac}}</td>
+                    <td>{{totalAll}}</td>
+
+                </tr>
 
                 <tr>
                     <form method="post" id="examinationSchemeTable">
@@ -61,6 +74,7 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="caISE" name="caISE">
+                            <option value="" disabled selected>Select an option</option>
                             <option value=30>30</option>
                             <option value=0> 0 </option>
                         </select>
@@ -69,7 +83,8 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="caIA" name="caIA">
-                            <option value=20>20</option>
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value=20>20</option>
                             <option value=0> 0 </option>
                         </select>
                             </div>
@@ -79,7 +94,8 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="ese" name="ese">
-                            <option value=50>50</option>
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value=50>50</option>
                             <option value=0> 0 </option>
                         </select>
                             </div>
@@ -87,7 +103,8 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="tw" name="tw">
-                            <option value=25>25</option>
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value=25>25</option>
                             <option value=0> 0 </option>
                         </select>
                             </div>
@@ -95,7 +112,8 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="oral" name="oral">
-                            <option value=25>25</option>
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value=25>25</option>
                             <option value=0> 0 </option>
                         </select>
                             </div>
@@ -103,7 +121,8 @@
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="oralAndPrac" name="oralAndPrac">
-                            <option value=25>25</option>
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value=25>25</option>
                             <option value=0> 0 </option>
                         </select>
                             </div>
