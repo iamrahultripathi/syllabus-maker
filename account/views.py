@@ -10,7 +10,6 @@ from django.shortcuts import render, redirect
 from django.db.models import Sum
 from .models import CreditScheme
 
-save_value=0
 
 def loginl(request):
     if request.method == "POST":
@@ -40,7 +39,7 @@ def logout_view(request):
     return redirect("/login")
 
 def creditScheme(request):
-    if request.method == 'POST' and request.session.get('count', 0) == 0:
+    if request.method == 'POST':
         courseCode = request.POST.get('courseCode')
         courseName = request.POST.get('courseName')
         teachingSchemeTH = request.POST.get('teachingSchemeth')
@@ -57,24 +56,12 @@ def creditScheme(request):
         programme=request.GET.get('programme', None)
         contact_data = CreditScheme(courseCode=courseCode, courseName=courseName, teachingSchemeTH=teachingSchemeTH,teachingSchemeP=teachingSchemeP,teachingSchemeTUT=teachingSchemeTUT, TotalHours=TotalHours, creditAssignedTH=creditAssignedTH,creditAssignedP=creditAssignedP,creditAssignedTUT=creditAssignedTUT, totalCredits=totalCredits, courseCategories=courseCategories,branch=branch, sem=sem,programme=programme)
         contact_data.save()
-        courseCode = None
-        courseName = None
-        teachingSchemeTH = None
-        teachingSchemeP = None
-        teachingSchemeTUT = None
-        TotalHours = None
-        creditAssignedTH = None
-        creditAssignedP = None
-        creditAssignedTUT = None
-        totalCredits = None
-        courseCategories = None
-        request.session['count'] = 1
+        request.session['courseCodeEx']=courseCode
+        request.session['courseNameEx']=courseName
+        request.session['courseCategoriesEx']=courseCategories
         request.session['branch']=request.GET.get('branch', None)
         request.session['sem']=request.GET.get('sem', None)
         request.session['programme']=request.GET.get('programme', None)
-        request.method == 'GET'
-    else:
-        request.session['count'] = 0
 
     data = CreditScheme.objects.filter(branch=request.GET.get('branch'), programme=request.GET.get('programme'), sem=request.GET.get('sem')).values()
     totalteachingSchemeTH=sum(data.values_list('teachingSchemeTH', flat=True))
@@ -88,7 +75,6 @@ def creditScheme(request):
     
     # totalteachingSchemeTH=CreditScheme.objects.aggregate(Sum('teachingSchemeTH'))
     student = {'val':"Credit",'data':data, 'totalteachingSchemeTH':totalteachingSchemeTH, 'totalteachingSchemeP':totalteachingSchemeP,'totalteachingSchemeTUT':totalteachingSchemeTUT,'totalTotalHours':totalTotalHours, 'totalcreditAssignedTH':totalcreditAssignedTH,'totalcreditAssignedP':totalcreditAssignedP,'totalcreditAssignedTUT':totalcreditAssignedTUT, 'totalcreditAssignedTUT':totalcreditAssignedTUT,'totaltotalCredits':totaltotalCredits}
-    request.session['count'] = 0
     return render(request,"creditScheme.html",student)
 
 def examinationScheme(request):
@@ -97,6 +83,7 @@ def examinationScheme(request):
     programme=request.session['programme']
     courseCode = request.session['courseCodeEx']
     courseName = request.session['courseNameEx']
+    courseCategories=request.session['courseCategoriesEx']
     if request.method == 'POST':
         caISE = request.POST.get('caISE')
         caIA = request.POST.get('caIA')
@@ -105,8 +92,9 @@ def examinationScheme(request):
         tw = request.POST.get('tw')
         oral = request.POST.get('oral')
         oralAndPrac = request.POST.get('oralAndPrac')
+        caLabTut=request.POST.get('caLabTut')
         totalEx = int(request.POST.get('caISE')) + int(request.POST.get('caIA')) + int(request.POST.get('ese')) + int(request.POST.get('tw')) + int(request.POST.get('oral')) + int(request.POST.get('oralAndPrac'))
-        contact_data = ExamSchm(courseCodeEx=courseCode, courseNameEx=courseName, caISE=caISE,caIA=caIA,caTotal=caTotal, ese=ese, tw=tw,oral=oral,oralAndPrac=oralAndPrac, totalEx=totalEx,branch=branch, sem=sem,programme=programme)
+        contact_data = ExamSchm(courseCategoriesEx=courseCategories,caLabTut=caLabTut, courseCodeEx=courseCode, courseNameEx=courseName, caISE=caISE,caIA=caIA,caTotal=caTotal, ese=ese, tw=tw,oral=oral,oralAndPrac=oralAndPrac, totalEx=totalEx,branch=branch, sem=sem,programme=programme)
         contact_data.save()
     data = ExamSchm.objects.filter(branch=branch, programme=programme, sem=sem).values()
     totalISE=sum(data.values_list('caISE', flat=True))
@@ -116,11 +104,12 @@ def examinationScheme(request):
     totaltw=sum(data.values_list('tw', flat=True))
     totaloral=sum(data.values_list('oral', flat=True))
     totaloralAndPrac=sum(data.values_list('oralAndPrac', flat=True))
+    totalcaLabTut=sum(data.values_list('caLabTut', flat=True))
     totalAll=sum(data.values_list('totalEx', flat=True))
         
-    student={'data':data,'totalISE':totalISE,'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
+    student={'data':data,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
              'branch':branch,'sem':sem, 'programme':programme,
-             'val':"Examination",'courseCode':courseCode,'courseName':courseName}
+             'val':"Examination",'courseCode':courseCode,'courseName':courseName,'courseCategories':courseCategories}
     return render(request, 'examinationScheme.html',student)
 
 

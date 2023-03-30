@@ -20,6 +20,8 @@
                     <th rowspan="3" class="text-center">TW</th>
                     <th rowspan="3">Oral</th>
                     <th rowspan="3">/Pract.<br/>and <br/>Oral</th>
+                    <th rowspan="3">Lab/Tut <br> CA</th>
+                    <th rowspan="3">Course Categories</th>
                     <th rowspan="3">Total</th>
                 </tr>
                 <tr class="text-danger">
@@ -47,6 +49,8 @@
                     <td>{{item.tw}}</td>
                     <td>{{item.oral}}</td>
                     <td>{{item.oralAndPrac}}</td>
+                    <td>{{item.caLabTut}}</td>
+                    <td>{{item.courseCategoriesEx}}</td>
                     <td>{{item.totalEx}}</td>
                 </tr>
                 {% endfor %}
@@ -60,6 +64,8 @@
                     <td>{{totaltw}}</td>
                     <td>{{totaloral}}</td>
                     <td>{{totaloralAndPrac}}</td>
+                    <td>{{totalcaLabTut}}</td>
+                    <td></td>
                     <td>{{totalAll}}</td>
 
                 </tr>
@@ -128,8 +134,18 @@
                             </div>
                         </td>
                         <td>
-
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="caLabTut" name="caLabTut">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value=75>75</option>
+                                    <option value=50>50</option>
+                                    <option value=25>25</option>
+                                    <option value=0> 0 </option>
+                        </select>
+                            </div>
                         </td>
+                        <td>{{courseCategories}}</td>
+                        <td></td>
                         <button type="submit" style="position:relative;top:-1rem;" id="submit_examinationScheme" class="btn btn-primary mt-4">Submit</button>
                     </form>
                 </tr>

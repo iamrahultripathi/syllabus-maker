@@ -45,6 +45,9 @@ class ExamSchm(models.Model):
   branch=models.CharField(max_length=255)
   sem=models.CharField(max_length=255)
   programme=models.CharField(max_length=255)
+  courseCategoriesEx = models.CharField(max_length=255)
+  caLabTut=models.IntegerField()
+
 
   def __str__(self):
          return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseNameEx
