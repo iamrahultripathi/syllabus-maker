@@ -5,6 +5,12 @@ from django.db.models import Sum
 from django.contrib import messages
 from django.urls import reverse
 from .models import *
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.db.models import Sum
+from .models import CreditScheme
+
+save_value=0
 
 def loginl(request):
     if request.method == "POST":
@@ -34,7 +40,7 @@ def logout_view(request):
     return redirect("/login")
 
 def creditScheme(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.session.get('count', 0) == 0:
         courseCode = request.POST.get('courseCode')
         courseName = request.POST.get('courseName')
         teachingSchemeTH = request.POST.get('teachingSchemeth')
@@ -51,13 +57,26 @@ def creditScheme(request):
         programme=request.GET.get('programme', None)
         contact_data = CreditScheme(courseCode=courseCode, courseName=courseName, teachingSchemeTH=teachingSchemeTH,teachingSchemeP=teachingSchemeP,teachingSchemeTUT=teachingSchemeTUT, TotalHours=TotalHours, creditAssignedTH=creditAssignedTH,creditAssignedP=creditAssignedP,creditAssignedTUT=creditAssignedTUT, totalCredits=totalCredits, courseCategories=courseCategories,branch=branch, sem=sem,programme=programme)
         contact_data.save()
+        courseCode = None
+        courseName = None
+        teachingSchemeTH = None
+        teachingSchemeP = None
+        teachingSchemeTUT = None
+        TotalHours = None
+        creditAssignedTH = None
+        creditAssignedP = None
+        creditAssignedTUT = None
+        totalCredits = None
+        courseCategories = None
+        request.session['count'] = 1
         request.session['branch']=request.GET.get('branch', None)
         request.session['sem']=request.GET.get('sem', None)
         request.session['programme']=request.GET.get('programme', None)
-        request.session['courseCodeEx']=courseCode
-        request.session['courseNameEx']=courseName
-    # data = CreditScheme.objects.all()
-    data = CreditScheme.objects.filter(branch= request.GET.get('branch'), programme= request.GET.get('programme'), sem= request.GET.get('sem')).values()
+        request.method == 'GET'
+    else:
+        request.session['count'] = 0
+
+    data = CreditScheme.objects.filter(branch=request.GET.get('branch'), programme=request.GET.get('programme'), sem=request.GET.get('sem')).values()
     totalteachingSchemeTH=sum(data.values_list('teachingSchemeTH', flat=True))
     totalteachingSchemeP=sum(data.values_list('teachingSchemeP', flat=True))
     totalteachingSchemeTUT=sum(data.values_list('teachingSchemeTUT', flat=True))
@@ -69,6 +88,7 @@ def creditScheme(request):
     
     # totalteachingSchemeTH=CreditScheme.objects.aggregate(Sum('teachingSchemeTH'))
     student = {'val':"Credit",'data':data, 'totalteachingSchemeTH':totalteachingSchemeTH, 'totalteachingSchemeP':totalteachingSchemeP,'totalteachingSchemeTUT':totalteachingSchemeTUT,'totalTotalHours':totalTotalHours, 'totalcreditAssignedTH':totalcreditAssignedTH,'totalcreditAssignedP':totalcreditAssignedP,'totalcreditAssignedTUT':totalcreditAssignedTUT, 'totalcreditAssignedTUT':totalcreditAssignedTUT,'totaltotalCredits':totaltotalCredits}
+    request.session['count'] = 0
     return render(request,"creditScheme.html",student)
 
 def examinationScheme(request):
