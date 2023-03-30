@@ -5,7 +5,7 @@
         <ul class="pagination">
 
             <li class="page-item"><a class="page-link" href="{% url 'creditScheme' %}?branch={{request.session.branch}}&programme={{request.session.programme}}&sem={{request.session.sem}}">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'facultyAssign' %}?branch={{request.session.branch}}&programme={{request.session.programme}}&sem={{request.session.sem}}">Next</a></li>
         </ul>
     </nav>
 </div>

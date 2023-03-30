@@ -51,4 +51,17 @@ class ExamSchm(models.Model):
 
   def __str__(self):
          return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseNameEx
+  
+class Assignfaculty(models.Model):
+       courseCodeEx = models.CharField(max_length=255)
+       courseNameEx = models.CharField(max_length=255)
+       faculty1=models.CharField(max_length=255)
+       faculty2=models.CharField(max_length=255)
+       faculty3=models.CharField(max_length=255)
+       reviewer=models.CharField(max_length=255)
+       branch=models.CharField(max_length=255)
+       sem=models.CharField(max_length=255)
+       programme=models.CharField(max_length=255)
+       
+      
  

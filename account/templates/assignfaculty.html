@@ -1,0 +1,96 @@
+{% extends 'main.html' %} {% block content %}
+
+<div>
+    <nav aria-label="Page navigation example" style="position:relative;top:3rem;left:75rem">
+        <ul class="pagination">
+
+            <li class="page-item"><a class="page-link" href="{% url 'creditScheme' %}?branch={{request.session.branch}}&programme={{request.session.programme}}&sem={{request.session.sem}}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
+<div>
+    <div class="container">
+        <table class="table table-bordered border-dark text-center">
+            <thead>
+                <tr class="text-danger">
+                    <th >Course Code</th>
+                    <th >Course Name</th>
+                    <th  class="text-center">Faculty1</th>
+                    <th  class="text-center">Faculty2</th>
+                    <th >Faculty3</th>
+                    <th >Reviewer</th>
+                    
+                </tr>
+               
+
+
+            </thead>
+            <tbody id="AssignFaculty">
+
+                {% for item in data %}
+                <tr id={{item.courseCodeEx}} contenteditable="true">
+                    <td>{{item.courseCodeEx}}</td>
+                    <td>{{item.courseNameEx}}</td>
+                    <td>{{item.faculty1}}</td>
+                    <td>{{item.faculty2}}</td>
+                    <td>{{item.faculty3}}</td>
+                    <td>{{item.reviewer}}</td>
+                   
+                </tr>
+                {% endfor %}
+             
+
+                <tr>
+                    <form method="post" id="AssignFaculty1">
+                        {% csrf_token %}
+                        <td>{{courseCode}}
+                        </td>
+                        <td>{{courseName}}
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="faculty1" name="faculty1">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Dr. Deepak Sharma (DHS)">Dr. Deepak Sharma (DHS)</option>
+                            <option value="Dr. Manish Potey (MMP)"> Dr. Manish Potey (MMP) </option>
+                        </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="faculty2" name="faculty2">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="Dr. Deepak Sharma (DHS)">Dr. Deepak Sharma (DHS)</option>
+                            <option value="Dr. Manish Potey (MMP)"> Dr. Manish Potey (MMP) </option>
+                        </select>
+                            </div>
+                        </td>
+                       
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="faculty3" name="faculty3">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="Dr. Deepak Sharma (DHS)">Dr. Deepak Sharma (DHS)</option>
+                            <option value="Dr. Manish Potey (MMP)"> Dr. Manish Potey (MMP) </option>
+                        </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="reviewer" name="reviewer">
+                                    <option value="" disabled selected>Select an option</option>
+                                    <option value="Dr. Deepak Sharma (DHS)">Dr. Deepak Sharma (DHS)</option>
+                            <option value="Dr. Manish Potey (MMP)"> Dr. Manish Potey (MMP) </option>
+                        </select>
+                            </div>
+                        </td>
+                    
+                        <button type="submit" style="position:relative;top:-1rem;" id="submit_examinationScheme" class="btn btn-primary mt-4">Submit</button>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

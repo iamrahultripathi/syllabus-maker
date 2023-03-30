@@ -19,7 +19,9 @@ def loginl(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+
             return redirect("home/")
+        
         else:
             messages.error(request, "Incorrect username or password.")
             if request.session['count']==0:
@@ -113,3 +115,22 @@ def examinationScheme(request):
     return render(request, 'examinationScheme.html',student)
 
 
+def facultyAssign(request):
+    branch=request.session['branch']
+    sem=request.session['sem']
+    programme=request.session['programme']
+    courseCode = request.session['courseCodeEx']
+    courseName = request.session['courseNameEx']
+    if request.method == 'POST':
+        faculty1 = request.POST.get('faculty1')
+        faculty2 = request.POST.get('faculty2')
+        faculty3 = request.POST.get('faculty3')
+        reviewer = request.POST.get('reviewer')
+        contact_data =  Assignfaculty( courseCodeEx=courseCode, courseNameEx=courseName,faculty1=faculty1,faculty2=faculty2,faculty3=faculty3,reviewer=reviewer,branch=branch, sem=sem,programme=programme)
+        contact_data.save()
+    data = Assignfaculty.objects.filter(branch=branch, programme=programme, sem=sem).values()
+    student={'data':data,
+             'branch':branch,'sem':sem, 'programme':programme,
+             'val':"Assign",'courseCode':courseCode,'courseName':courseName}
+    return render(request, 'assignfaculty.html',student)
+ 
