@@ -13,6 +13,7 @@ class Teacher(models.Model):
 
 
 class CreditScheme(models.Model):
+  id = models.AutoField(primary_key=True)
   courseCode = models.CharField(max_length=255)
   courseName = models.CharField(max_length=255)
   teachingSchemeTH = models.IntegerField()
@@ -32,6 +33,7 @@ class CreditScheme(models.Model):
      return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseName
   
 class ExamSchm(models.Model):
+  id = models.AutoField(primary_key=True)
   courseCodeEx = models.CharField(max_length=255)
   courseNameEx = models.CharField(max_length=255)
   caISE = models.IntegerField()
@@ -53,15 +55,16 @@ class ExamSchm(models.Model):
          return self.branch+'_'+self.programme+'_'+self.sem+'_'+self.courseNameEx
   
 class Assignfaculty(models.Model):
-       courseCodeEx = models.CharField(max_length=255)
-       courseNameEx = models.CharField(max_length=255)
-       faculty1=models.CharField(max_length=255)
-       faculty2=models.CharField(max_length=255)
-       faculty3=models.CharField(max_length=255)
-       reviewer=models.CharField(max_length=255)
-       branch=models.CharField(max_length=255)
-       sem=models.CharField(max_length=255)
-       programme=models.CharField(max_length=255)
+      id = models.AutoField(primary_key=True)
+      courseCodeEx = models.CharField(max_length=255)
+      courseNameEx = models.CharField(max_length=255)
+      faculty1=models.CharField(max_length=255)
+      faculty2=models.CharField(max_length=255)
+      faculty3=models.CharField(max_length=255)
+      reviewer=models.CharField(max_length=255)
+      branch=models.CharField(max_length=255)
+      sem=models.CharField(max_length=255)
+      programme=models.CharField(max_length=255)
        
       
  

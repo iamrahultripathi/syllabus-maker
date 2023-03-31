@@ -8,7 +8,8 @@ from .models import *
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from .models import CreditScheme
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 
 
 def loginl(request):
@@ -76,7 +77,7 @@ def creditScheme(request):
     totaltotalCredits=sum(data.values_list('totalCredits', flat=True))
     
     # totalteachingSchemeTH=CreditScheme.objects.aggregate(Sum('teachingSchemeTH'))
-    student = {'val':"Credit",'data':data, 'totalteachingSchemeTH':totalteachingSchemeTH, 'totalteachingSchemeP':totalteachingSchemeP,'totalteachingSchemeTUT':totalteachingSchemeTUT,'totalTotalHours':totalTotalHours, 'totalcreditAssignedTH':totalcreditAssignedTH,'totalcreditAssignedP':totalcreditAssignedP,'totalcreditAssignedTUT':totalcreditAssignedTUT, 'totalcreditAssignedTUT':totalcreditAssignedTUT,'totaltotalCredits':totaltotalCredits}
+    student = {'val':"Credit",'myvalue':1, 'data':data, 'totalteachingSchemeTH':totalteachingSchemeTH, 'totalteachingSchemeP':totalteachingSchemeP,'totalteachingSchemeTUT':totalteachingSchemeTUT,'totalTotalHours':totalTotalHours, 'totalcreditAssignedTH':totalcreditAssignedTH,'totalcreditAssignedP':totalcreditAssignedP,'totalcreditAssignedTUT':totalcreditAssignedTUT, 'totalcreditAssignedTUT':totalcreditAssignedTUT,'totaltotalCredits':totaltotalCredits}
     return render(request,"creditScheme.html",student)
 
 def examinationScheme(request):
@@ -95,7 +96,7 @@ def examinationScheme(request):
         oral = request.POST.get('oral')
         oralAndPrac = request.POST.get('oralAndPrac')
         caLabTut=request.POST.get('caLabTut')
-        totalEx = int(request.POST.get('caISE')) + int(request.POST.get('caIA')) + int(request.POST.get('ese')) + int(request.POST.get('tw')) + int(request.POST.get('oral')) + int(request.POST.get('oralAndPrac'))
+        totalEx = int(request.POST.get('caISE')) + int(request.POST.get('caIA')) +int(request.POST.get('caLabTut')) + int(request.POST.get('ese')) + int(request.POST.get('tw')) + int(request.POST.get('oral')) + int(request.POST.get('oralAndPrac'))
         contact_data = ExamSchm(courseCategoriesEx=courseCategories,caLabTut=caLabTut, courseCodeEx=courseCode, courseNameEx=courseName, caISE=caISE,caIA=caIA,caTotal=caTotal, ese=ese, tw=tw,oral=oral,oralAndPrac=oralAndPrac, totalEx=totalEx,branch=branch, sem=sem,programme=programme)
         contact_data.save()
     data = ExamSchm.objects.filter(branch=branch, programme=programme, sem=sem).values()
@@ -109,7 +110,7 @@ def examinationScheme(request):
     totalcaLabTut=sum(data.values_list('caLabTut', flat=True))
     totalAll=sum(data.values_list('totalEx', flat=True))
         
-    student={'data':data,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
+    student={'data':data,'myvalue':2,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
              'branch':branch,'sem':sem, 'programme':programme,
              'val':"Examination",'courseCode':courseCode,'courseName':courseName,'courseCategories':courseCategories}
     return render(request, 'examinationScheme.html',student)
@@ -133,4 +134,84 @@ def facultyAssign(request):
              'branch':branch,'sem':sem, 'programme':programme,
              'val':"Assign",'courseCode':courseCode,'courseName':courseName}
     return render(request, 'assignfaculty.html',student)
- 
+  
+@csrf_exempt
+def savestudentCredit(request):
+    id=request.POST.get('id','')
+    type=request.POST.get('type','')
+    value=request.POST.get('value','')
+    student=CreditScheme.objects.get(id=id)
+    if type=="courseCode":
+       student.courseCode=value
+
+    if type == "courseName":
+        student.courseName = value
+
+    if type == "teachingSchemeTH":
+        student.teachingSchemeTH = value
+
+    if type == "teachingSchemeP":
+        student.teachingSchemeP = value
+
+    if type == "teachingSchemeTUT":
+        student.teachingSchemeTUT = value
+
+    if type == "creditAssignedTH":
+        student.creditAssignedTH = value
+
+    if type == "creditAssignedP":
+        student.creditAssignedP = value
+
+    if type == "creditAssignedTUT":
+        student.creditAssignedTUT = value
+
+    if type == "courseCategories":
+        student.courseCategories = value
+    student.TotalHours = int(student.teachingSchemeTH) + int(student.teachingSchemeP) + int(student.teachingSchemeTUT)
+    student.totalCredits = int(student.creditAssignedTH) + int(student.creditAssignedP) + int(student.creditAssignedTUT)
+    
+    
+    student.save()
+    return JsonResponse({"success":"Updated"})
+
+@csrf_exempt
+def savestudentExamination(request):
+    id=request.POST.get('id','')
+    type=request.POST.get('type','')
+    value=request.POST.get('value','')
+    student=ExamSchm.objects.get(id=id)
+    if type=="courseCodeEx":
+       student.courseCodeEx=value
+
+    if type == "courseNameEx":
+        student.courseNameEx = value
+
+    if type == "caISE":
+        student.caISE = value
+
+    if type == "caIA":
+        student.caIA = value
+
+    if type == "ese":
+        student.ese = value
+
+    if type == "tw":
+        student.tw = value
+
+    if type == "oral":
+        student.oral = value
+
+    if type == "oralAndPrac":
+        student.oralAndPrac = value
+
+    if type == "caLabTut":
+        student.caLabTut = value
+
+    if type == "courseCategoriesEx":
+        student.courseCategoriesEx = value
+    student.caTotal = int(student.caISE) + int(student.caIA)
+    student.totalEx = int(student.caISE) + int(student.caIA) + int(student.ese) + int(student.tw) + int(student.oral) + int(student.oralAndPrac) + int(student.caLabTut)
+    
+    
+    student.save()
+    return JsonResponse({"success":"Updated"})

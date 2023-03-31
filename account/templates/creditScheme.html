@@ -37,18 +37,18 @@
             <tbody id="creditSchemeTablebody">
 
                 {% for item in data %}
-                <tr id={{item.courseCode}} contenteditable="true">
-                    <td>{{item.courseCode}}</td>
-                    <td>{{item.courseName}}</td>
-                    <td>{{item.teachingSchemeTH}}</td>
-                    <td>{{item.teachingSchemeP}}</td>
-                    <td>{{item.teachingSchemeTUT}}</td>
-                    <td>{{item.TotalHours}}</td>
-                    <td>{{item.creditAssignedTH}}</td>
-                    <td>{{item.creditAssignedP}}</td>
-                    <td>{{item.creditAssignedTUT}}</td>
-                    <td>{{item.totalCredits}}</td>
-                    <td>{{item.courseCategories}}</td>
+                <tr>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseCode">{{item.courseCode}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseName">{{item.courseName}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="teachingSchemeTH">{{item.teachingSchemeTH}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="teachingSchemeP">{{item.teachingSchemeP}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="teachingSchemeTUT">{{item.teachingSchemeTUT}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="TotalHours">{{item.TotalHours}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="creditAssignedTH">{{item.creditAssignedTH}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="creditAssignedP">{{item.creditAssignedP}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="creditAssignedTUT">{{item.creditAssignedTUT}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="totalCredits">{{item.totalCredits}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseCategories">{{item.courseCategories}}</td>
                 </tr>
                 {% endfor %}
                 <tr class="fw-bold">

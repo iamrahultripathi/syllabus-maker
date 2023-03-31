@@ -39,19 +39,19 @@
             <tbody id="examinationSchemeTablebody">
 
                 {% for item in data %}
-                <tr id={{item.courseCodeEx}} contenteditable="true">
-                    <td>{{item.courseCodeEx}}</td>
-                    <td>{{item.courseNameEx}}</td>
-                    <td>{{item.caISE}}</td>
-                    <td>{{item.caIA}}</td>
-                    <td>{{item.caTotal}}</td>
-                    <td>{{item.ese}}</td>
-                    <td>{{item.tw}}</td>
-                    <td>{{item.oral}}</td>
-                    <td>{{item.oralAndPrac}}</td>
-                    <td>{{item.caLabTut}}</td>
-                    <td>{{item.courseCategoriesEx}}</td>
-                    <td>{{item.totalEx}}</td>
+                <tr>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseCodeEx">{{item.courseCodeEx}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseNameEx">{{item.courseNameEx}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="caISE">{{item.caISE}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="caIA">{{item.caIA}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="caTotal">{{item.caTotal}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="ese">{{item.ese}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="tw">{{item.tw}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="oral">{{item.oral}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="oralAndPrac">{{item.oralAndPrac}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="caLabTut">{{item.caLabTut}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseCategoriesEx">{{item.courseCategoriesEx}}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="totalEx">{{item.totalEx}}</td>
                 </tr>
                 {% endfor %}
                 <tr class="fw-bold">
