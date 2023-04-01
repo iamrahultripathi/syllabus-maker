@@ -20,21 +20,28 @@ def loginl(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            if user.groups.filter(name='HOD').exists():
+                return redirect("home/")
+            elif user.groups.filter(name='Teachers').exists():
+                return redirect("teacher/")
 
-            return redirect("home/")
-        
         else:
             messages.error(request, "Incorrect username or password.")
             if request.session['count']==0:
                 return redirect('/')
 
-            
     return render(request, 'login.html')
 
 
 @login_required(login_url='/')
 def home(request):
     return render(request, 'home.html')
+
+@login_required(login_url='/')
+def teacher(request):
+    return render(request, 'teacher.html')
+
+
 
 
 def logout_view(request):

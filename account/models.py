@@ -2,11 +2,22 @@ from django.db import models
 
 # Create your models here.
 
+
 class Teacher(models.Model):
-    username=models.CharField(max_length=100)
-    password=models.CharField(max_length=100)
-    role=models.CharField(max_length=100)
-    date_created=models.DateTimeField(auto_now_add=True)
+    HOD = 'HOD'
+    CREATOR = 'CREATOR'
+    TEACHER = 'TEACHER'
+    REVIEWER= 'REVIEWER'
+    ROLE_CHOICES = [
+        (HOD, 'Hod'),
+        (CREATOR, 'Creator'),
+        (TEACHER, 'Teacher'),
+        (REVIEWER,'Reviewer')
+    ]
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    role = models.CharField(max_length=100, choices=ROLE_CHOICES)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.username
