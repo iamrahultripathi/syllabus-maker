@@ -76,6 +76,9 @@ class Assignfaculty(models.Model):
       branch=models.CharField(max_length=255)
       sem=models.CharField(max_length=255)
       programme=models.CharField(max_length=255)
+
+      def __str__(self):
+          return self.branch+'_'+self.sem+'_'+self.courseNameEx
        
       
  
