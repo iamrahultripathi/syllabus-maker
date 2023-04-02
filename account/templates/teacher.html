@@ -1,13 +1,29 @@
+{% extends 'main.html' %}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is teachers login</h1>
-</body>
-</html>
+<div>
+    <nav aria-label="Page navigation example" style="position:relative;top:3rem;left:75rem">
+        
+    </nav>
+</div>
+<div>
+    <div class="container">
+        <table class="table table-bordered border-dark text-center" id="creditSchemeTable" style="overflow-y:scroll">
+            <thead>
+                <tr class="text-danger">
+                    <th rowspan="5">Course Code</th>
+                    <th rowspan="5">Course Name</th>
+                </tr>
+            </thead>
+            <tbody id="facultyLoginFirstView">
+                {% for item in data %}
+                <tr>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseCode">{{ item.courseCodeEx }}</td>
+                    <td class="editable" data-id="{{ item.id }}" data-type="courseName">{{ item.courseNameEx }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

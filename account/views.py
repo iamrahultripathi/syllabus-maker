@@ -23,7 +23,8 @@ def loginl(request):
             if user.groups.filter(name='HOD').exists():
                 return redirect("home/")
             elif user.groups.filter(name='Teachers').exists():
-                return redirect("teacher/")
+                return redirect("teacher", username=username)
+            
 
         else:
             messages.error(request, "Incorrect username or password.")
@@ -38,8 +39,15 @@ def home(request):
     return render(request, 'home.html')
 
 @login_required(login_url='/')
-def teacher(request):
-    return render(request, 'teacher.html')
+def teacher(request, username):
+    data = Assignfaculty.objects.filter(faculty1=username) | Assignfaculty.objects.filter(faculty2=username) | Assignfaculty.objects.filter(faculty3=username).values()
+    
+    context={'data':data,
+             }
+    
+    return render(request, 'teacher.html', context)
+
+    
 
 
 
