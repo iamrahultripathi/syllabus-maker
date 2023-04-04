@@ -231,5 +231,5 @@ def savestudentExamination(request):
     student.save()
     return JsonResponse({"success":"Updated"})
 
-def courseDetail(request):
+def courseDetail(request, username):
     return render(request, 'courseDetail.html')

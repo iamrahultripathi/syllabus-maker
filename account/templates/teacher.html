@@ -1,18 +1,21 @@
-{% extends 'main.html' %} {% block content %}
+
+
+{% extends 'main.html' %}
+{% block content %}
 
 <div>
     <nav aria-label="Page navigation example" style="position:relative;top:3rem;left:75rem">
 
-    </nav>
+</nav>
 </div>
 <div>
     <div class="container">
         <table class="table table-bordered border-dark text-center" id="creditSchemeTable" style="overflow-y:scroll">
             <thead>
                 <tr class="text-danger">
-                    <th rowspan="3">Course Code</th>
-                    <th rowspan="3">Course Name</th>
-                    <th rowspan="3">Go to</th>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Go to</th>
                 </tr>
             </thead>
             <tbody id="facultyLoginFirstView">
@@ -20,6 +23,9 @@
                 <tr>
                     <td class="editable" data-id="{{ item.id }}" data-type="courseCode">{{ item.courseCodeEx }}</td>
                     <td class="editable" data-id="{{ item.id }}" data-type="courseName">{{ item.courseNameEx }}</td>
+                    <td>
+                        <a href="{% url 'courseDetail' username=request.resolver_match.kwargs.username %}">Course Detail</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
