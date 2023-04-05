@@ -24,7 +24,7 @@
                     <td class="editable" data-id="{{ item.id }}" data-type="courseCode">{{ item.courseCodeEx }}</td>
                     <td class="editable" data-id="{{ item.id }}" data-type="courseName">{{ item.courseNameEx }}</td>
                     <td>
-                        <a href="{% url 'courseDetail' username=request.resolver_match.kwargs.username %}">Course Detail</a>
+                        <a href="{% url 'courseDetail' username=request.resolver_match.kwargs.username course_code=item.courseCodeEx course_name=item.courseNameEx %}">Course Detail</a>
                     </td>
                 </tr>
                 {% endfor %}

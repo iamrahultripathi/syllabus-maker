@@ -149,7 +149,21 @@ def facultyAssign(request):
              'branch':branch,'sem':sem, 'programme':programme,
              'val':"Assign",'courseCode':courseCode,'courseName':courseName}
     return render(request, 'assignfaculty.html',student)
-  
+def courseDetail(request, username, course_code, course_name):
+    course_code=course_code
+    course_name=course_name
+    data = CreditScheme.objects.filter(courseCode=course_code, courseName=course_name).values()
+    data1= ExamSchm.objects.filter(courseCodeEx=course_code, courseNameEx=course_name).values()
+    sumData={
+        'data':data,
+        'data1':data1
+    }
+    
+    print('data:', data)
+    print('data1:', data1)
+
+    return render(request, 'courseDetail.html',sumData)
+
 @csrf_exempt
 def savestudentCredit(request):
     id=request.POST.get('id','')
@@ -231,5 +245,4 @@ def savestudentExamination(request):
     student.save()
     return JsonResponse({"success":"Updated"})
 
-def courseDetail(request, username):
-    return render(request, 'courseDetail.html')
+

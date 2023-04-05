@@ -10,7 +10,8 @@ urlpatterns = [
     path('logout/', views.logout_view,name='logout'),
     path('login/home/', views.home, name='login-home'),
     path('login/teacher/<str:username>/', views.teacher, name='teacher'),
-    path('login/<str:username>/courseDetail', views.courseDetail, name='courseDetail'),
+    path('login/<str:username>/<str:course_code>/<str:course_name>/courseDetail', views.courseDetail, name='courseDetail'),
+    
     path('login/home/creditScheme/', views.creditScheme, name='creditScheme'),
     path('savestudentCredit', views.savestudentCredit, name='savestudentCredit'),
     path('savestudentExamination', views.savestudentExamination, name='savestudentExamination'),
