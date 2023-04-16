@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-
+from django.http import HttpResponse
 
 def loginl(request):
     if request.method == "POST":
@@ -78,6 +78,7 @@ def creditScheme(request):
     request.session['branch']=request.GET.get('branch', None)
     request.session['sem']=request.GET.get('sem', None)
     request.session['programme']=request.GET.get('programme', None)
+        
 
     data = CreditScheme.objects.filter(branch=request.GET.get('branch'), programme=request.GET.get('programme'), sem=request.GET.get('sem')).values()
     totalteachingSchemeTH=sum(data.values_list('teachingSchemeTH', flat=True))
@@ -263,3 +264,11 @@ def savestudentExamination(request):
     return JsonResponse({"success":"Updated"})
 
 
+@csrf_exempt
+
+def delete_row(request):
+    print("hello")
+    if request.method == 'GET':
+        id = request.GET.get('id')
+        CreditScheme.objects.filter(id=id).delete()
+        return HttpResponse('Row deleted successfully.')
