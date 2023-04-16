@@ -99,8 +99,8 @@ def examinationScheme(request):
     branch=request.session['branch']
     sem=request.session['sem']
     programme=request.session['programme']
-    courseCode = request.session['courseCodeEx']
-    courseName = request.session['courseNameEx']
+    coursecode = request.session['courseCodeEx']
+    coursename = request.session['courseNameEx']
     courseCategories=request.session['courseCategoriesEx']
     if request.method == 'POST':
         caISE = request.POST.get('caISE')
@@ -112,9 +112,11 @@ def examinationScheme(request):
         oralAndPrac = request.POST.get('oralAndPrac')
         caLabTut=request.POST.get('caLabTut')
         totalEx = int(request.POST.get('caISE')) + int(request.POST.get('caIA')) +int(request.POST.get('caLabTut')) + int(request.POST.get('ese')) + int(request.POST.get('tw')) + int(request.POST.get('oral')) + int(request.POST.get('oralAndPrac'))
-        contact_data = ExamSchm(courseCategoriesEx=courseCategories,caLabTut=caLabTut, courseCodeEx=courseCode, courseNameEx=courseName, caISE=caISE,caIA=caIA,caTotal=caTotal, ese=ese, tw=tw,oral=oral,oralAndPrac=oralAndPrac, totalEx=totalEx,branch=branch, sem=sem,programme=programme)
+        contact_data = ExamSchm(courseCategoriesEx=courseCategories,caLabTut=caLabTut, courseCodeEx=coursecode, courseNameEx=coursename, caISE=caISE,caIA=caIA,caTotal=caTotal, ese=ese, tw=tw,oral=oral,oralAndPrac=oralAndPrac, totalEx=totalEx,branch=branch, sem=sem,programme=programme)
         contact_data.save()
     data = ExamSchm.objects.filter(branch=branch, programme=programme, sem=sem).values()
+    data1 = CreditScheme.objects.filter(branch=branch, programme=programme, sem=sem).values('courseCode', 'courseName','courseCategories')
+    data2 = ExamSchm.objects.filter(branch=branch, programme=programme, sem=sem).values('courseCodeEx', 'courseNameEx')
     totalISE=sum(data.values_list('caISE', flat=True))
     totalIA=sum(data.values_list('caIA', flat=True))
     totalcaTotal=sum(data.values_list('caTotal', flat=True))
@@ -124,10 +126,25 @@ def examinationScheme(request):
     totaloralAndPrac=sum(data.values_list('oralAndPrac', flat=True))
     totalcaLabTut=sum(data.values_list('caLabTut', flat=True))
     totalAll=sum(data.values_list('totalEx', flat=True))
+    # for filter_dict in data1:
+    #     data2 = data2.exclude(**filter_dict)
+    # query_set = list(data2.values())
+    # print(query_set)
+    result = []
+    for d1 in data1:
+        match = False
+        for d2 in data2:
+            if d1['courseCode'] == d2['courseCodeEx'] and d1['courseName'] == d2['courseNameEx']:
+               match = True
+               break
+        if not match:
+            result.append(d1)
         
-    student={'data':data,'myvalue':2,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
+    print(result)
+    
+    student={'result':result,'data':data,'myvalue':2,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
              'branch':branch,'sem':sem, 'programme':programme,
-             'val':"Examination",'courseCode':courseCode,'courseName':courseName,'courseCategories':courseCategories}
+             'val':"Examination",'courseCode':coursecode,'courseName':coursename,'courseCategories':courseCategories}
     return render(request, 'examinationScheme.html',student)
 
 

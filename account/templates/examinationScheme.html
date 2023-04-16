@@ -73,11 +73,27 @@
                 <tr>
                     <form method="post" id="examinationSchemeTable">
                         {% csrf_token %}
-                        <td>{{courseCode}}
+
+                        <td>
+                            
+                            <div class="form-group">
+                                <select required type="text" class="form-control" id="courseCodeEx" name="courseCodeEx">
+                            <option value="" disabled selected>Select an option</option>
+                            {% for item in result %}
+                            <option value={{item.courseCode}}>{{item.courseCode}}</option>
+                            
+                            {% endfor %}
                         </td>
-                        <td>{{courseName}}
+                        <td>  <div class="form-group">
+                            <select required type="text" class="form-control" id="courseNameEx" name="courseNameEx">
+                        <option value="" disabled selected>Select an option</option>
+                        {% for item in result %}
+                        <option value={{item.courseName}}>{{item.courseName}}</option>
+                        
+                        {% endfor %}
                         </td>
                         <td>
+
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="caISE" name="caISE">
                             <option value="" disabled selected>Select an option</option>
@@ -144,7 +160,13 @@
                         </select>
                             </div>
                         </td>
-                        <td>{{courseCategories}}</td>
+                        <td><div class="form-group">
+                            <select required type="text" class="form-control" id="courseCategoriesEx" name="courseCategoriesEx">
+                        <option value="" disabled selected>Select an option</option>
+                        {% for item in result %}
+                        <option value={{item.courseCategories}}>{{item.courseCategories}}</option>
+                        
+                        {% endfor %}</td>
                         <td></td>
                         <button type="submit" style="position:relative;top:-1rem;" id="submit_examinationScheme" class="btn btn-primary mt-4">Submit</button>
                     </form>
