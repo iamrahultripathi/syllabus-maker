@@ -44,44 +44,148 @@
                 <tr>
                     <form method="post" id="AssignFaculty1">
                         {% csrf_token %}
-                        <td>{{courseCode}}
+                        <td><div class="form-group">
+                            <select required type="text" class="form-control" id="courseCodeEx" name="courseCodeEx">
+                        <option value="" disabled selected>Select an option</option>
+                        {% for item in result %}
+                            <option value={{item.courseCode}}>{{item.courseCode}}</option>
+                            
+                            {% endfor %}
                         </td>
-                        <td>{{courseName}}
+                        <td><div class="form-group">
+                            <select required type="text" class="form-control" id="courseNameEx" name="courseNameEx">
+                        <option value="" disabled selected>Select an option</option>
+                        {% for item in result %}
+                            <option value={{item.courseName}}>{{item.courseName}}</option>
+                            
+                            {% endfor %}
                         </td>
                         <td>
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="faculty1" name="faculty1">
                             <option value="" disabled selected>Select an option</option>
+                            <option value="archana.gupta@somaiya.edu"> Dr. Archana Gupta (AAG) </option>
+                            <option value="bhaktiraul@somaiya.edu"> Dr. Bhakti Palkar (BNP) </option>
+                            <option value="bharthihn@somaiya.edu"> Ms. Bharathi H N (BHN) </option>
                             <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
+                            <option value="gopal.s@somaiya.edu"> Ms. Gopal Sonune (GSS) </option>
+                            <option value="neelammotwani@somaiya.edu"> Ms. Grishma Sharma (GJS) </option>
+                            <option value="jyoti.joglekar@somaiya.edu"> Dr. Jyoti Joglekar (JVJ) </option>
+                            <option value="jyothirao@somaiya.edu"> Ms. Jyothi Rao (JMR) </option>
+                            <option value="kulkarni.k@somaiya.edu"> Mr. Kaustubh Kulkarni </option>
+                            <option value="kavitakelkar@somaiya.edu"> Ms. Kavita Kelkar (KMK) </option>
                             <option value="manishpotey@somaiya.edu"> Dr. Manish Potey (MMP) </option>
+                            <option value="prasadinipadwal@somaiya.edu"> Ms. Mansi Kambli (MMK) </option>
+                            <option value="nirmalashinde@somaiya.edu"> Ms. Nirmala Shinde (NKS) </option>
+                            <option value="poonambhogale@somaiya.edu"> Ms. Poonam Bhogle (PMB) </option>
+                            <option value="pradnyagothmare@somaiya.edu"> Ms. Pradnya Gotmare (PSG) </option>
+                            <option value="prasannashete@somaiya.edu"> Dr. Prasanna Shete (PJS) </option>
+                            <option value="rohininair@somaiya.edu"> Ms. Rohini Nair (RAN) </option>
+                            <option value="sheetalpereira@somaiya.edu"> Ms. Sheetal Pereira (SIP) </option>
+                            <option value="shweta.chachra@somaiya.edu"> Ms. Shweta Chachra (SDC) </option>
+                            <option value="smitasankhe@somaiya.edu"> Ms. Smita Sankhe (SRS) </option>
+                            <option value="swapnil.cp@somaiya.edu"> Mr. Swapnil Pawar (SCP) </option>
+                            <option value="swatimali@somaiya.edu"> Ms. Swati Mali (SNM) </option>
+                            <option value="udayjoshi@somaiya.edu"> Mr. Uday Joshi (UBJ) </option>
+                            <option value="vaibhav.vasani@somaiya.edu"> Mr. Vaibhav Vasani (VPV) </option>
+                            <option value="zaheedshaikh@somaiya.edu"> Mr. Zaheed Shaikh (ZSS) </option>
                         </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <select required type="text" class="form-control" id="faculty2" name="faculty2">
-                                    <option value="" disabled selected>Select an option</option>
-                                    <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <select required type="text" class="form-control" id="faculty2" name="faculty2">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="archana.gupta@somaiya.edu"> Dr. Archana Gupta (AAG) </option>
+                            <option value="bhaktiraul@somaiya.edu"> Dr. Bhakti Palkar (BNP) </option>
+                            <option value="bharthihn@somaiya.edu"> Ms. Bharathi H N (BHN) </option>
+                            <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
+                            <option value="gopal.s@somaiya.edu"> Ms. Gopal Sonune (GSS) </option>
+                            <option value="neelammotwani@somaiya.edu"> Ms. Grishma Sharma (GJS) </option>
+                            <option value="jyoti.joglekar@somaiya.edu"> Dr. Jyoti Joglekar (JVJ) </option>
+                            <option value="jyothirao@somaiya.edu"> Ms. Jyothi Rao (JMR) </option>
+                            <option value="kulkarni.k@somaiya.edu"> Mr. Kaustubh Kulkarni </option>
+                            <option value="kavitakelkar@somaiya.edu"> Ms. Kavita Kelkar (KMK) </option>
                             <option value="manishpotey@somaiya.edu"> Dr. Manish Potey (MMP) </option>
+                            <option value="prasadinipadwal@somaiya.edu"> Ms. Mansi Kambli (MMK) </option>
+                            <option value="nirmalashinde@somaiya.edu"> Ms. Nirmala Shinde (NKS) </option>
+                            <option value="poonambhogale@somaiya.edu"> Ms. Poonam Bhogle (PMB) </option>
+                            <option value="pradnyagothmare@somaiya.edu"> Ms. Pradnya Gotmare (PSG) </option>
+                            <option value="prasannashete@somaiya.edu"> Dr. Prasanna Shete (PJS) </option>
+                            <option value="rohininair@somaiya.edu"> Ms. Rohini Nair (RAN) </option>
+                            <option value="sheetalpereira@somaiya.edu"> Ms. Sheetal Pereira (SIP) </option>
+                            <option value="shweta.chachra@somaiya.edu"> Ms. Shweta Chachra (SDC) </option>
+                            <option value="smitasankhe@somaiya.edu"> Ms. Smita Sankhe (SRS) </option>
+                            <option value="swapnil.cp@somaiya.edu"> Mr. Swapnil Pawar (SCP) </option>
+                            <option value="swatimali@somaiya.edu"> Ms. Swati Mali (SNM) </option>
+                            <option value="udayjoshi@somaiya.edu"> Mr. Uday Joshi (UBJ) </option>
+                            <option value="vaibhav.vasani@somaiya.edu"> Mr. Vaibhav Vasani (VPV) </option>
+                            <option value="zaheedshaikh@somaiya.edu"> Mr. Zaheed Shaikh (ZSS) </option>
                         </select>
-                            </div>
-                        </td>
-                       
-                        <td>
-                            <div class="form-group">
-                                <select required type="text" class="form-control" id="faculty3" name="faculty3">
-                                    <option value="" disabled selected>Select an option</option>
-                                    <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
-                                    <option value="manishpotey@somaiya.edu"> Dr. Manish Potey (MMP) </option>
-                        </select>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <select required type="text" class="form-control" id="reviewer" name="reviewer">
-                                    <option value="" disabled selected>Select an option</option>
-                                    <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
+                    </div>
+                </td>
+                
+                <td>
+                    <div class="form-group">
+                        <select required type="text" class="form-control" id="faculty3" name="faculty3">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="archana.gupta@somaiya.edu"> Dr. Archana Gupta (AAG) </option>
+                            <option value="bhaktiraul@somaiya.edu"> Dr. Bhakti Palkar (BNP) </option>
+                            <option value="bharthihn@somaiya.edu"> Ms. Bharathi H N (BHN) </option>
+                            <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
+                            <option value="gopal.s@somaiya.edu"> Ms. Gopal Sonune (GSS) </option>
+                            <option value="neelammotwani@somaiya.edu"> Ms. Grishma Sharma (GJS) </option>
+                            <option value="jyoti.joglekar@somaiya.edu"> Dr. Jyoti Joglekar (JVJ) </option>
+                            <option value="jyothirao@somaiya.edu"> Ms. Jyothi Rao (JMR) </option>
+                            <option value="kulkarni.k@somaiya.edu"> Mr. Kaustubh Kulkarni </option>
+                            <option value="kavitakelkar@somaiya.edu"> Ms. Kavita Kelkar (KMK) </option>
                             <option value="manishpotey@somaiya.edu"> Dr. Manish Potey (MMP) </option>
+                            <option value="prasadinipadwal@somaiya.edu"> Ms. Mansi Kambli (MMK) </option>
+                            <option value="nirmalashinde@somaiya.edu"> Ms. Nirmala Shinde (NKS) </option>
+                            <option value="poonambhogale@somaiya.edu"> Ms. Poonam Bhogle (PMB) </option>
+                            <option value="pradnyagothmare@somaiya.edu"> Ms. Pradnya Gotmare (PSG) </option>
+                            <option value="prasannashete@somaiya.edu"> Dr. Prasanna Shete (PJS) </option>
+                            <option value="rohininair@somaiya.edu"> Ms. Rohini Nair (RAN) </option>
+                            <option value="sheetalpereira@somaiya.edu"> Ms. Sheetal Pereira (SIP) </option>
+                            <option value="shweta.chachra@somaiya.edu"> Ms. Shweta Chachra (SDC) </option>
+                            <option value="smitasankhe@somaiya.edu"> Ms. Smita Sankhe (SRS) </option>
+                            <option value="swapnil.cp@somaiya.edu"> Mr. Swapnil Pawar (SCP) </option>
+                            <option value="swatimali@somaiya.edu"> Ms. Swati Mali (SNM) </option>
+                            <option value="udayjoshi@somaiya.edu"> Mr. Uday Joshi (UBJ) </option>
+                            <option value="vaibhav.vasani@somaiya.edu"> Mr. Vaibhav Vasani (VPV) </option>
+                            <option value="zaheedshaikh@somaiya.edu"> Mr. Zaheed Shaikh (ZSS) </option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <select required type="text" class="form-control" id="reviewer" name="reviewer">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="archana.gupta@somaiya.edu"> Dr. Archana Gupta (AAG) </option>
+                            <option value="bhaktiraul@somaiya.edu"> Dr. Bhakti Palkar (BNP) </option>
+                            <option value="bharthihn@somaiya.edu"> Ms. Bharathi H N (BHN) </option>
+                            <option value="deepaksharma@somaiya.edu">Dr. Deepak Sharma (DHS)</option>
+                            <option value="gopal.s@somaiya.edu"> Ms. Gopal Sonune (GSS) </option>
+                            <option value="neelammotwani@somaiya.edu"> Ms. Grishma Sharma (GJS) </option>
+                            <option value="jyoti.joglekar@somaiya.edu"> Dr. Jyoti Joglekar (JVJ) </option>
+                            <option value="jyothirao@somaiya.edu"> Ms. Jyothi Rao (JMR) </option>
+                            <option value="kulkarni.k@somaiya.edu"> Mr. Kaustubh Kulkarni </option>
+                            <option value="kavitakelkar@somaiya.edu"> Ms. Kavita Kelkar (KMK) </option>
+                            <option value="manishpotey@somaiya.edu"> Dr. Manish Potey (MMP) </option>
+                            <option value="prasadinipadwal@somaiya.edu"> Ms. Mansi Kambli (MMK) </option>
+                            <option value="nirmalashinde@somaiya.edu"> Ms. Nirmala Shinde (NKS) </option>
+                            <option value="poonambhogale@somaiya.edu"> Ms. Poonam Bhogle (PMB) </option>
+                            <option value="pradnyagothmare@somaiya.edu"> Ms. Pradnya Gotmare (PSG) </option>
+                            <option value="prasannashete@somaiya.edu"> Dr. Prasanna Shete (PJS) </option>
+                            <option value="rohininair@somaiya.edu"> Ms. Rohini Nair (RAN) </option>
+                            <option value="sheetalpereira@somaiya.edu"> Ms. Sheetal Pereira (SIP) </option>
+                            <option value="shweta.chachra@somaiya.edu"> Ms. Shweta Chachra (SDC) </option>
+                            <option value="smitasankhe@somaiya.edu"> Ms. Smita Sankhe (SRS) </option>
+                            <option value="swapnil.cp@somaiya.edu"> Mr. Swapnil Pawar (SCP) </option>
+                            <option value="swatimali@somaiya.edu"> Ms. Swati Mali (SNM) </option>
+                            <option value="udayjoshi@somaiya.edu"> Mr. Uday Joshi (UBJ) </option>
+                            <option value="vaibhav.vasani@somaiya.edu"> Mr. Vaibhav Vasani (VPV) </option>
+                            <option value="zaheedshaikh@somaiya.edu"> Mr. Zaheed Shaikh (ZSS) </option>
                         </select>
                             </div>
                         </td>

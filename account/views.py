@@ -141,8 +141,6 @@ def examinationScheme(request):
         if not match:
             result.append(d1)
         
-    print(result)
-    
     student={'result':result,'data':data,'myvalue':2,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
              'branch':branch,'sem':sem, 'programme':programme,
              'val':"Examination"}
@@ -153,19 +151,23 @@ def facultyAssign(request):
     branch=request.session['branch']
     sem=request.session['sem']
     programme=request.session['programme']
-    courseCode = request.session['courseCodeEx']
-    courseName = request.session['courseNameEx']
     if request.method == 'POST':
+        courseCodeEx=request.POST.get('courseCodeEx')
+        courseNameEx=request.POST.get('courseNameEx')
         faculty1 = request.POST.get('faculty1')
         faculty2 = request.POST.get('faculty2')
         faculty3 = request.POST.get('faculty3')
         reviewer = request.POST.get('reviewer')
-        contact_data =  Assignfaculty( courseCodeEx=courseCode, courseNameEx=courseName,faculty1=faculty1,faculty2=faculty2,faculty3=faculty3,reviewer=reviewer,branch=branch, sem=sem,programme=programme)
+        contact_data =  Assignfaculty( courseCodeEx=courseCodeEx, courseNameEx=courseNameEx,faculty1=faculty1,faculty2=faculty2,faculty3=faculty3,reviewer=reviewer,branch=branch, sem=sem,programme=programme)
         contact_data.save()
+    data1 = CreditScheme.objects.filter(branch=branch, programme=programme, sem=sem).values('courseCode', 'courseName')
     data = Assignfaculty.objects.filter(branch=branch, programme=programme, sem=sem).values()
+    result = []
+    for d1 in data1:
+        result.append(d1)
     student={'data':data,
              'branch':branch,'sem':sem, 'programme':programme,
-             'val':"Assign",'courseCode':courseCode,'courseName':courseName}
+             'val':"Assign", 'result':result}
     return render(request, 'assignfaculty.html',student)
 def courseDetail(request, username, course_code, course_name):
     course_code=course_code
