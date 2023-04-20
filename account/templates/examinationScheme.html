@@ -75,23 +75,26 @@
                         {% csrf_token %}
 
                         <td>
-                            
                             <div class="form-group">
                                 <select required type="text" class="form-control" id="courseCodeEx" name="courseCodeEx">
-                            <option value="" disabled selected>Select an option</option>
-                            {% for item in result %}
-                            <option value={{item.courseCode}}>{{item.courseCode}}</option>
-                            
-                            {% endfor %}
+                                    <option value="" disabled selected>Select an option</option>
+                                    {% for item in result %}
+                                        <option value="{{ item.courseCode }}">{{ item.courseCode }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </td>
-                        <td>  <div class="form-group">
-                            <select required type="text" class="form-control" id="courseNameEx" name="courseNameEx">
-                        <option value="" disabled selected>Select an option</option>
-                        {% for item in result %}
-                        <option value={{item.courseName}}>{{item.courseName}}</option>
-                        
-                        {% endfor %}
-                        </td>
+                           <td>
+        <div class="form-group">
+            <select required type="text" class="form-control" id="courseNameEx" name="courseNameEx">
+                <option value="" disabled selected>Select an option</option>
+                {% for item in result %}
+                    <option value="{{ item.courseName }}">{{ item.courseName }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </td>
+
                         <td>
 
                             <div class="form-group">
@@ -175,4 +178,5 @@
         </table>
     </div>
 </div>
+
 {% endblock %}
