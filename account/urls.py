@@ -16,5 +16,6 @@ urlpatterns = [
     path('savestudentCredit', views.savestudentCredit, name='savestudentCredit'),
     path('savestudentExamination', views.savestudentExamination, name='savestudentExamination'),
     path('login/home/creditScheme/examinationScheme/', views.examinationScheme, name='examinationScheme'),
-    path('login/home/creditScheme/examinationScheme/facultyAssign',views.facultyAssign,name='facultyAssign')
+    path('login/home/creditScheme/examinationScheme/facultyAssign',views.facultyAssign,name='facultyAssign'),
+    path('get_course_name/', views.get_course_name, name='get_course_name'),
 ]

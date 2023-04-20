@@ -11,6 +11,9 @@ from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_GET
 
 def loginl(request):
     if request.method == "POST":
@@ -140,7 +143,7 @@ def examinationScheme(request):
                break
         if not match:
             result.append(d1)
-        
+    
     student={'result':result,'data':data,'myvalue':2,'totalISE':totalISE,'totalcaLabTut':totalcaLabTut, 'totalIA':totalIA,'totalcaTotal':totalcaTotal,'totalese':totalese,'totaltw':totaltw, 'totaloral':totaloral, 'totaloralAndPrac':totaloralAndPrac,'totalAll':totalAll,
              'branch':branch,'sem':sem, 'programme':programme,
              'val':"Examination"}
@@ -274,3 +277,11 @@ def delete_row(request):
         id = request.GET.get('id')
         CreditScheme.objects.filter(id=id).delete()
         return HttpResponse('Row deleted successfully.')
+    
+@require_GET
+def get_course_name(request):
+    course_code = request.GET.get('courseCode')
+    course = get_object_or_404(CreditScheme, courseCode=course_code)
+    data = {'courseName': course.courseName}
+    print(data)
+    return JsonResponse(data)
